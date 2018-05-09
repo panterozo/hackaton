@@ -90,8 +90,43 @@ function validaNumeroDiez(numero,largo)
 	numero.value="$"+numero.value;
 	var cleanNP=cleanN*0.03;
 	var t = parseInt(cleanNP)+parseInt(cleanN);
-	var montoDisp=150165-cleanN;
-	//document.getElementById("#totalEnvio").value = montoDisp;
-	$("#totalEnvio").val(t)
+	
+	if(t>150165){
+		alert("El monto es superior al que se mantiene en caja")
+		$("#totalEnvio").val("$0")
+		return;
+		}
+	else{
+		var v=t+"";
+		var i=v.length-3;
+		while (i>0){
+				v=v.substring(0,i)+"."+v.substring(i);
+				i-=3;
+		} 
+		t="$"+v;
 		
+		//var montoDisp=150165-cleanN;
+		//document.getElementById("#totalEnvio").value = montoDisp;
+		$("#totalEnvio").val(t)
+		
+		}
 }
+
+function valida(){
+	
+	var count=0;
+	if($('#bolivia').is(":visible")){count=1;}
+	if($('#ecuador').is(":visible")){count=1;}
+	if($('#peru').is(":visible")){count=1;}
+	
+	if(count==1){
+		alert("Se generará transferencia electrónica con datos ingresados");
+		return true;
+		}
+	else{
+		alert("Debe seleccionar destinatario");
+		return false;
+		}
+	
+	
+	}
